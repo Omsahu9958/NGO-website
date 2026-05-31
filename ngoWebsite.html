@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>HopeRoot Foundation — Rooted in Community</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sand:    #F5F0E8;
+    --cream:   #FDFBF7;
+    --earth:   #2C2416;
+    --moss:    #4A6741;
+    --clay:    #9E6B4A;
+    --mist:    #B8C4B1;
+    --border:  #E0D9CC;
+    --serif:   'Cormorant Garamond', Georgia, serif;
+    --sans:    'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--earth);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ──────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 5vw;
+    background: rgba(253,251,247,.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    transition: padding .3s;
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    color: var(--earth);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--moss); }
+  .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+  .nav-links a {
+    font-size: .83rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--earth);
+    text-decoration: none;
+    opacity: .65;
+    transition: opacity .2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta {
+    font-size: .8rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: .6rem 1.4rem;
+    background: var(--moss);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background .2s;
+  }
+  .nav-cta:hover { background: var(--earth); }
+
+  /* hamburger */
+  .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .burger span { display: block; width: 22px; height: 1.5px; background: var(--earth); transition: all .3s; }
+
+  /* ── SECTIONS SHARED ──────────────────── */
+  section { padding: 7rem 5vw; }
+  .tag {
+    display: inline-block;
+    font-size: .72rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 1rem;
+  }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 300; }
+  h1 { font-size: clamp(2.6rem, 6vw, 5rem); line-height: 1.1; }
+  h2 { font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.15; }
+  h3 { font-size: 1.5rem; font-weight: 400; }
+  p { font-size: .95rem; color: #5a5040; max-width: 54ch; }
+
+  .divider {
+    width: 40px; height: 1px;
+    background: var(--moss);
+    margin: 1.6rem 0;
+  }
+
+  /* ── HERO ──────────────────────────────── */
+  #home {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 4rem;
+    padding-top: 8rem;
+    padding-bottom: 5rem;
+    background: var(--sand);
+    position: relative;
+    overflow: hidden;
+  }
+  #home::before {
+    content: '';
+    position: absolute;
+    right: -6vw; bottom: -6vw;
+    width: 42vw; height: 42vw;
+    border-radius: 50%;
+    background: var(--mist);
+    opacity: .28;
+  }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text h1 { margin-bottom: 1.4rem; }
+  .hero-text h1 em { font-style: italic; color: var(--moss); }
+  .hero-text p { font-size: 1.05rem; margin-bottom: 2.5rem; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    padding: .85rem 2rem;
+    background: var(--moss);
+    color: #fff;
+    font-family: var(--sans);
+    font-size: .82rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background .2s, transform .2s;
+  }
+  .btn-primary:hover { background: var(--earth); transform: translateY(-1px); }
+  .btn-outline {
+    padding: .85rem 2rem;
+    background: transparent;
+    color: var(--earth);
+    font-family: var(--sans);
+    font-size: .82rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: border-color .2s, transform .2s;
+  }
+  .btn-outline:hover { border-color: var(--earth); transform: translateY(-1px); }
+
+  .hero-visual {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .stat-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    padding: 1.8rem 1.5rem;
+    animation: fadeUp .7s both;
+  }
+  .stat-card:nth-child(2) { animation-delay: .12s; margin-top: 1.8rem; }
+  .stat-card:nth-child(3) { animation-delay: .24s; }
+  .stat-card:nth-child(4) { animation-delay: .36s; margin-top: 1.8rem; }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: var(--moss);
+    line-height: 1;
+    margin-bottom: .4rem;
+  }
+  .stat-label { font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; opacity: .6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── ABOUT ─────────────────────────────── */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 6rem;
+    align-items: center;
+  }
+  .about-img-col { position: relative; }
+  .about-img-frame {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: var(--mist);
+    position: relative;
+    overflow: hidden;
+  }
+  .about-img-frame svg { width: 100%; height: 100%; opacity: .35; }
+  .about-accent-box {
+    position: absolute;
+    bottom: -1.5rem; right: -1.5rem;
+    width: 60%;
+    background: var(--moss);
+    color: #fff;
+    padding: 1.8rem;
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+  .values-list { list-style: none; margin-top: 1.8rem; }
+  .values-list li {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 1rem; align-items: flex-start;
+    font-size: .9rem;
+  }
+  .values-list li:first-child { border-top: 1px solid var(--border); }
+  .v-num {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--moss);
+    min-width: 1.8rem;
+    font-style: italic;
+  }
+
+  /* ── SERVICES / PROGRAMS ───────────────── */
+  #services { background: var(--sand); }
+  .services-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1rem;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .service-card {
+    background: var(--sand);
+    padding: 2.5rem 2rem;
+    transition: background .25s;
+    cursor: default;
+  }
+  .service-card:hover { background: var(--cream); }
+  .service-icon {
+    width: 44px; height: 44px;
+    background: var(--moss);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  .service-icon svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 1.6; }
+  .service-card h3 { font-size: 1.25rem; margin-bottom: .7rem; }
+  .service-card p { font-size: .86rem; max-width: none; }
+
+  /* ── IMPACT ────────────────────────────── */
+  #impact { text-align: center; }
+  .impact-nums {
+    display: flex; justify-content: center; gap: 5vw;
+    flex-wrap: wrap; margin: 3.5rem 0;
+  }
+  .impact-item { text-align: center; }
+  .impact-item .big {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 300;
+    color: var(--moss);
+    line-height: 1;
+    display: block;
+  }
+  .impact-item .lbl { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; opacity: .55; margin-top: .4rem; display: block; }
+  #impact > p { margin: 0 auto; text-align: center; }
+
+  /* ── GET INVOLVED ──────────────────────── */
+  #get-involved { background: var(--earth); color: var(--sand); }
+  #get-involved .tag { color: var(--mist); }
+  #get-involved h2 { color: #fff; }
+  #get-involved p { color: var(--mist); max-width: 52ch; }
+  .involve-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem; margin-top: 3rem;
+  }
+  .involve-card {
+    border: 1px solid rgba(255,255,255,.12);
+    padding: 2.2rem 1.8rem;
+    transition: border-color .25s;
+  }
+  .involve-card:hover { border-color: var(--mist); }
+  .involve-card h3 { color: #fff; font-size: 1.3rem; margin: 1rem 0 .6rem; }
+  .involve-card p { font-size: .86rem; max-width: none; margin-bottom: 1.5rem; }
+  .involve-num {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    font-style: italic;
+    color: var(--mist);
+    opacity: .35;
+  }
+  .btn-light {
+    padding: .65rem 1.4rem;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,.35);
+    color: #fff;
+    font-size: .78rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+  }
+  .btn-light:hover { border-color: #fff; background: rgba(255,255,255,.07); }
+
+  /* ── CONTACT ───────────────────────────── */
+  #contact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+  .contact-info { }
+  .contact-info p { margin-bottom: 2rem; }
+  .info-row {
+    display: flex; gap: 1rem; align-items: flex-start;
+    margin-bottom: 1.5rem;
+  }
+  .info-icon {
+    width: 38px; height: 38px;
+    background: var(--sand);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .info-icon svg { width: 16px; height: 16px; stroke: var(--moss); fill: none; stroke-width: 1.8; }
+  .info-text strong { display: block; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--moss); margin-bottom: .25rem; }
+  .info-text span { font-size: .88rem; }
+
+  /* form */
+  .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  label { font-size: .75rem; letter-spacing: .09em; text-transform: uppercase; color: var(--earth); opacity: .6; display: block; margin-bottom: .45rem; }
+  input, textarea, select {
+    width: 100%;
+    padding: .8rem 1rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--earth);
+    font-family: var(--sans);
+    font-size: .9rem;
+    outline: none;
+    transition: border-color .2s;
+    resize: vertical;
+  }
+  input:focus, textarea:focus, select:focus { border-color: var(--moss); }
+  textarea { min-height: 130px; }
+  .form-submit {
+    align-self: flex-start;
+    padding: .9rem 2.2rem;
+    background: var(--moss);
+    color: #fff;
+    border: none;
+    font-family: var(--sans);
+    font-size: .82rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .form-submit:hover { background: var(--earth); }
+
+  /* ── FOOTER ────────────────────────────── */
+  footer {
+    background: var(--earth);
+    color: var(--mist);
+    padding: 3.5rem 5vw 2rem;
+  }
+  .footer-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 2rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    margin-bottom: 2rem;
+  }
+  .footer-brand a {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    color: #fff;
+    text-decoration: none;
+  }
+  .footer-brand a span { color: var(--mist); }
+  .footer-brand p { font-size: .82rem; margin-top: .7rem; max-width: 28ch; color: var(--mist); opacity: .65; }
+  .footer-cols { display: flex; gap: 4rem; flex-wrap: wrap; }
+  .footer-col h4 {
+    font-family: var(--sans); font-weight: 500;
+    font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
+    color: rgba(255,255,255,.4); margin-bottom: 1rem;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: .6rem; }
+  .footer-col ul li a { color: var(--mist); text-decoration: none; font-size: .85rem; opacity: .65; transition: opacity .2s; }
+  .footer-col ul li a:hover { opacity: 1; }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+    font-size: .78rem; opacity: .4;
+  }
+  .social-links { display: flex; gap: 1.2rem; }
+  .social-links a { color: var(--mist); text-decoration: none; font-size: .8rem; opacity: .5; transition: opacity .2s; }
+  .social-links a:hover { opacity: 1; }
+
+  /* ── MOBILE ────────────────────────────── */
+  @media (max-width: 780px) {
+    nav { padding: 1.1rem 5vw; }
+    .nav-links, .nav-cta { display: none; }
+    .burger { display: flex; }
+    .mobile-menu {
+      display: none;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--cream);
+      z-index: 200;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--earth);
+      text-decoration: none;
+    }
+    .mobile-close {
+      position: absolute; top: 1.4rem; right: 5vw;
+      font-size: 1.8rem; background: none; border: none; cursor: pointer; color: var(--earth);
+    }
+
+    #home { grid-template-columns: 1fr; padding-top: 7rem; }
+    .hero-visual { display: grid; grid-template-columns: 1fr 1fr; }
+    #about { grid-template-columns: 1fr; gap: 3rem; }
+    .about-accent-box { right: 0; }
+    #contact { grid-template-columns: 1fr; gap: 3rem; }
+    .field-row { grid-template-columns: 1fr; }
+    .impact-nums { gap: 2.5rem; }
+    .footer-top { flex-direction: column; }
+    .footer-cols { gap: 2rem; }
+  }
+
+  /* ── SCROLL ANIMATION ──────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="#home">Hope<span>Root</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Programs</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#get-involved">Get Involved</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">Donate</a>
+  <button class="burger" id="burgerBtn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="closeMenu">✕</button>
+  <a href="#home" class="mob-link">Home</a>
+  <a href="#about" class="mob-link">About</a>
+  <a href="#services" class="mob-link">Programs</a>
+  <a href="#impact" class="mob-link">Impact</a>
+  <a href="#get-involved" class="mob-link">Get Involved</a>
+  <a href="#contact" class="mob-link">Contact</a>
+</div>
+
+<!-- ── HERO ───────────────────────────────── -->
+<section id="home">
+  <div class="hero-text reveal">
+    <span class="tag">Est. 2014 · Indore, India</span>
+    <h1>Rooted in<br><em>Community,</em><br>Growing Together</h1>
+    <div class="divider"></div>
+    <p>HopeRoot Foundation empowers underserved communities through education, healthcare access, and sustainable livelihoods — one family at a time.</p>
+    <div class="hero-btns">
+      <a href="#get-involved" class="btn-primary">Support Our Mission</a>
+      <a href="#about" class="btn-outline">Our Story</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="stat-card">
+      <div class="stat-num">12K+</div>
+      <div class="stat-label">Lives Touched</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">38</div>
+      <div class="stat-label">Villages Reached</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">94%</div>
+      <div class="stat-label">Program Completion</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">10</div>
+      <div class="stat-label">Years of Service</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ──────────────────────────────── -->
+<section id="about">
+  <div class="about-img-col reveal">
+    <div class="about-img-frame">
+      <!-- Decorative SVG illustration -->
+      <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="200" cy="180" r="120" fill="#4A6741" opacity=".2"/>
+        <circle cx="200" cy="180" r="70" fill="#4A6741" opacity=".25"/>
+        <!-- simplified people silhouettes -->
+        <ellipse cx="160" cy="320" rx="20" ry="28" fill="#2C2416" opacity=".18"/>
+        <circle cx="160" cy="282" r="14" fill="#2C2416" opacity=".18"/>
+        <ellipse cx="220" cy="315" rx="22" ry="30" fill="#2C2416" opacity=".14"/>
+        <circle cx="220" cy="276" r="15" fill="#2C2416" opacity=".14"/>
+        <ellipse cx="280" cy="322" rx="18" ry="26" fill="#2C2416" opacity=".12"/>
+        <circle cx="280" cy="287" r="12" fill="#2C2416" opacity=".12"/>
+        <!-- tree trunk / roots -->
+        <path d="M200 170 Q195 230 190 350" stroke="#4A6741" stroke-width="3" fill="none" opacity=".4"/>
+        <path d="M200 170 Q210 240 215 350" stroke="#4A6741" stroke-width="2" fill="none" opacity=".3"/>
+        <path d="M190 350 Q160 380 130 400" stroke="#4A6741" stroke-width="2" fill="none" opacity=".3"/>
+        <path d="M215 350 Q240 375 270 400" stroke="#4A6741" stroke-width="2" fill="none" opacity=".3"/>
+        <path d="M200 350 Q198 375 200 430" stroke="#4A6741" stroke-width="2" fill="none" opacity=".25"/>
+      </svg>
+    </div>
+    <div class="about-accent-box">
+      "Every root strengthens the whole tree. Every community member matters."
+    </div>
+  </div>
+  <div class="about-text reveal">
+    <span class="tag">Who We Are</span>
+    <h2>A Foundation Built on <em>Trust</em></h2>
+    <div class="divider"></div>
+    <p>Founded in 2014 in Indore, HopeRoot began with a single classroom and twelve children. Today we work across three districts, partnering with local governments, schools, and health workers to create lasting change — not charity.</p>
+    <ul class="values-list">
+      <li><span class="v-num">01</span><div><strong style="font-size:.88rem;">Community First</strong><br>Every program is designed with, not for, the communities we serve.</div></li>
+      <li><span class="v-num">02</span><div><strong style="font-size:.88rem;">Accountability</strong><br>We publish annual impact reports and spend at least 88 paise of every rupee on programs.</div></li>
+      <li><span class="v-num">03</span><div><strong style="font-size:.88rem;">Long-term Thinking</strong><br>We invest in skills and systems, not short-term relief, for sustainable futures.</div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── SERVICES / PROGRAMS ──────────────── -->
+<section id="services">
+  <div class="services-header reveal">
+    <div>
+      <span class="tag">What We Do</span>
+      <h2>Our Core Programs</h2>
+    </div>
+    <a href="#contact" class="btn-outline">Partner With Us →</a>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <h3>Education Access</h3>
+      <p>Free tutoring centres, digital literacy, and scholarship support for students in Classes 1–12 across rural Madhya Pradesh.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <h3>Community Health</h3>
+      <p>Monthly health camps, maternal care support, and training local health volunteers to bridge the gap between clinics and homes.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      </div>
+      <h3>Women's Livelihoods</h3>
+      <p>Skill development workshops, SHG formation, and microfinance linkages empowering 2,000+ women with sustainable incomes.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <h3>Shelter & WASH</h3>
+      <p>Clean drinking water, sanitation infrastructure, and temporary shelter support for disaster-affected families.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+      </div>
+      <h3>Youth Leadership</h3>
+      <p>After-school clubs, debate & sports, and a flagship Young Changemakers Programme for teenagers aged 14–18.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <h3>Volunteer Network</h3>
+      <p>A 400-member volunteer corps of professionals, students, and retirees powering every program on the ground.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── IMPACT ──────────────────────────────── -->
+<section id="impact">
+  <div class="reveal">
+    <span class="tag">Our Impact</span>
+    <h2>A Decade of<br><em>Measured Change</em></h2>
+  </div>
+  <div class="impact-nums">
+    <div class="impact-item reveal"><span class="big">12,400</span><span class="lbl">Beneficiaries</span></div>
+    <div class="impact-item reveal"><span class="big">38</span><span class="lbl">Villages</span></div>
+    <div class="impact-item reveal"><span class="big">2,100</span><span class="lbl">Women Empowered</span></div>
+    <div class="impact-item reveal"><span class="big">₹4.2Cr</span><span class="lbl">Grants Disbursed</span></div>
+    <div class="impact-item reveal"><span class="big">400</span><span class="lbl">Active Volunteers</span></div>
+  </div>
+  <p class="reveal">Every number represents a real family — a child who stayed in school, a mother who started her own business, a village with clean water for the first time.</p>
+</section>
+
+<!-- ── GET INVOLVED ─────────────────────── -->
+<section id="get-involved">
+  <div class="reveal">
+    <span class="tag">Join Us</span>
+    <h2>There Are Many<br>Ways to Help</h2>
+    <div class="divider" style="background:var(--mist);"></div>
+    <p>Whether you have time, skills, or resources — there is a place for you in this work.</p>
+  </div>
+  <div class="involve-grid">
+    <div class="involve-card reveal">
+      <div class="involve-num">01</div>
+      <h3>Donate</h3>
+      <p>Your contribution funds education kits, health camps, and livelihood training directly.</p>
+      <a href="#contact" class="btn-light">Give Now</a>
+    </div>
+    <div class="involve-card reveal">
+      <div class="involve-num">02</div>
+      <h3>Volunteer</h3>
+      <p>Teach, mentor, translate, code, design — bring whatever skill you have to the ground.</p>
+      <a href="#contact" class="btn-light">Sign Up</a>
+    </div>
+    <div class="involve-card reveal">
+      <div class="involve-num">03</div>
+      <h3>Corporate CSR</h3>
+      <p>Partner your company's CSR mandate with high-impact, audited programs in MP and beyond.</p>
+      <a href="#contact" class="btn-light">Partner With Us</a>
+    </div>
+    <div class="involve-card reveal">
+      <div class="involve-num">04</div>
+      <h3>Spread the Word</h3>
+      <p>Follow us, share our stories, and bring HopeRoot to the attention of your community.</p>
+      <a href="#contact" class="btn-light">Share Our Work</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ──────────────────────────── -->
+<section id="contact">
+  <div class="contact-info reveal">
+    <span class="tag">Contact Us</span>
+    <h2>Let's Start a<br><em>Conversation</em></h2>
+    <div class="divider"></div>
+    <p>Whether you want to donate, volunteer, or just learn more — we'd love to hear from you. Our team responds within 48 hours.</p>
+    <div class="info-row">
+      <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <div class="info-text"><strong>Address</strong><span>14, Sudama Nagar, Indore — 452 009, Madhya Pradesh</span></div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg></div>
+      <div class="info-text"><strong>Phone</strong><span>+91 73894 00112</span></div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+      <div class="info-text"><strong>Email</strong><span>hello@hoperoot.org</span></div>
+    </div>
+  </div>
+  <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+    <div class="field-row">
+      <div>
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" placeholder="Ananya" required/>
+      </div>
+      <div>
+        <label for="lname">Last Name</label>
+        <input type="text" id="lname" placeholder="Sharma"/>
+      </div>
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="you@example.com" required/>
+    </div>
+    <div>
+      <label for="subject">I want to…</label>
+      <select id="subject">
+        <option value="">Select an option</option>
+        <option>Donate</option>
+        <option>Volunteer</option>
+        <option>Corporate Partnership / CSR</option>
+        <option>Media Inquiry</option>
+        <option>General Question</option>
+      </select>
+    </div>
+    <div>
+      <label for="message">Message</label>
+      <textarea id="message" placeholder="Tell us a bit more…"></textarea>
+    </div>
+    <button type="submit" class="form-submit">Send Message</button>
+    <p id="form-thanks" style="display:none;color:var(--moss);font-size:.88rem;">Thank you! We'll be in touch soon.</p>
+  </form>
+</section>
+
+<!-- ── FOOTER ───────────────────────────── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#home">Hope<span>Root</span> Foundation</a>
+      <p>Rooted in community. Growing together since 2014.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Organisation</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Programs</a></li>
+          <li><a href="#impact">Impact</a></li>
+          <li><a href="#">Annual Reports</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get Involved</h4>
+        <ul>
+          <li><a href="#get-involved">Donate</a></li>
+          <li><a href="#get-involved">Volunteer</a></li>
+          <li><a href="#get-involved">Corporate CSR</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">80G Certificate</a></li>
+          <li><a href="#">12A Registration</a></li>
+          <li><a href="#">FCRA Status</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 HopeRoot Foundation. CIN: U85300MP2014NPL000123</span>
+    <div class="social-links">
+      <a href="#">Twitter</a>
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Facebook</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Burger menu
+  const burger = document.getElementById('burgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const closeMenu = document.getElementById('closeMenu');
+  burger.addEventListener('click', () => mobileMenu.classList.add('open'));
+  closeMenu.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  document.querySelectorAll('.mob-link').forEach(l => l.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => io.observe(r));
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('form-thanks').style.display = 'block';
+    e.target.querySelector('.form-submit').textContent = 'Sent ✓';
+    e.target.querySelector('.form-submit').style.background = '#4A6741';
+  }
+
+  // Navbar shrink on scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').style.padding = window.scrollY > 40 ? '.9rem 5vw' : '1.4rem 5vw';
+  });
+</script>
+</body>
+</html>
